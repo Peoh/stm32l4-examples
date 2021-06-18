@@ -1,6 +1,6 @@
 /*
 	Sample main for STM32L4 target.
-	The default code blink a LED on PB3 (Nucleo-32)
+	The code will toggle a GPIO output (PB3) a 1Hz frequency
 */
 
 #include "stm32l4xx.h"
