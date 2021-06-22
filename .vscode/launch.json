@@ -55,6 +55,19 @@
                 "board/st_nucleo_l4.cfg"
 			],
 			"svdFile": "svd/STM32L4x2.svd",
+		},
+		{
+			"name": "Debug 05-pwm-timer",
+			"cwd": "${workspaceRoot}",
+			"executable": "projects/05-pwm-timer/main.elf",
+			"request": "launch",
+			"type": "cortex-debug",
+			"servertype": "openocd",
+			"gdbPath": "${config:toolchain.bin}/${config:toolchain.targetarch}gdb",
+			"configFiles": [
+                "board/st_nucleo_l4.cfg"
+			],
+			"svdFile": "svd/STM32L4x2.svd",
 		}
 	]
 }
