@@ -3,12 +3,12 @@
 	The code will toggle a GPIO output (PB3) a 1Hz frequency
 */
 
-#include "stm32l4xx.h"
 #include "main.h"
-#include "macros.h"
 
-int main(void)
-{
+#include "macros.h"
+#include "stm32l4xx.h"
+
+int main(void) {
 	// Enable GPIO clock
 	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;
 
@@ -31,7 +31,9 @@ int main(void)
 
 	// Output compare configuration
 	// Reset channel 2 fields
-	TIM2->CCMR1 &= ~(TIM_CCMR1_CC2S_Msk | TIM_CCMR1_OC2FE_Msk | TIM_CCMR1_OC2PE_Msk | TIM_CCMR1_OC2M_Msk | TIM_CCMR1_OC2CE_Msk);
+	TIM2->CCMR1 &=
+		~(TIM_CCMR1_CC2S_Msk | TIM_CCMR1_OC2FE_Msk | TIM_CCMR1_OC2PE_Msk |
+		  TIM_CCMR1_OC2M_Msk | TIM_CCMR1_OC2CE_Msk);
 	// CCMR1 CC2S is in output by reset (0b00)
 	// Set CCMR1 OC2M as PWM mode 1 (0b0110)
 	TIM2->CCMR1 |= TIM_CCMR1_OC2M_1 | TIM_CCMR1_OC2M_2;
@@ -50,8 +52,7 @@ int main(void)
 	// Enable the Timer
 	TIM2->CR1 |= TIM_CR1_CEN;
 
-	while (1)
-	{
+	while (1) {
 	}
 	return 0;
 }

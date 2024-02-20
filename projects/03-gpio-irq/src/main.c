@@ -1,29 +1,29 @@
 /*
 	Sample main for STM32L4 target.
 	The code will toggle a GPIO (PB3) when a EXTI interrupt occurs on PA0
-	PA0 is connected to a button connected to grounb. PA0 needs to be pulled up internally.
+	PA0 is connected to a button connected to grounb. PA0 needs to be pulled up
+   internally.
 */
 
-#include "stm32l4xx.h"
 #include "main.h"
-#include "macros.h"
 
-void EXTI0_IRQHandler(void){
+#include "macros.h"
+#include "stm32l4xx.h"
+
+void EXTI0_IRQHandler(void) {
 	// check if line interrupt occured on correct EXTI
-	if (EXTI->PR1 & EXTI_PR1_PIF0)
-	{
+	if (EXTI->PR1 & EXTI_PR1_PIF0) {
 		TOG_BIT(GPIOB->ODR, GPIO_ODR_OD3);
 		// reset interrupt flag by setting '1' in SWIER_SWI0 bit
 		EXTI->PR1 |= EXTI_PR1_PIF0;
 	}
 }
 
-int main(void)
-{
+int main(void) {
 	// Enable GPIO clock (A and B port)
 	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;
 	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOAEN;
-	
+
 	// Enable SYSCFG for EXTI interrupts
 	RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;
 
@@ -52,8 +52,7 @@ int main(void)
 	NVIC_SetPriority(EXTI0_IRQn, 0x02);
 	NVIC_EnableIRQ(EXTI0_IRQn);
 
-	while (1)
-	{
+	while (1) {
 	}
 	return 0;
 }

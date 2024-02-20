@@ -63,3 +63,24 @@ $(SUBDIRS_TARGETS) :
 .PHONY: docker-setup
 docker-setup:
 	@docker build -t $(DOCKER_TAG) $(CURDIR)
+
+.PHONY: format
+SRCS := $(shell find projects -type f -name "*.c")
+HEADERS = $(shell find projects -type f -name "*.h")
+format:
+	@for src in $(SRCS) $(HEADERS); do \
+		printf "Running format on $$src...\n" ; \
+		clang-format \
+			-i "$$src"; \
+	done
+
+.PHONY: check-format
+check-format:
+	@for src in $(SRCS) $(HEADERS) $(TEST_SRCS) ; do \
+		var=`clang-format "$$src" | diff "$$src" - | wc -l` ; \
+		if [ $$var -ne 0 ] ; then \
+			echo "$$src does not respect the coding style (diff: $$var lines)" ; \
+			exit 1 ; \
+		fi ; \
+	done
+	@printf "Style check passed\n"

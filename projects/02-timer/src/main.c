@@ -3,13 +3,14 @@
 	The code will toggle a GPIO output (PB3) a 1Hz frequency
 */
 
-#include "stm32l4xx.h"
 #include "main.h"
-#include "macros.h"
 
-void TIM2_IRQHandler(void){
-	// Check if The update interrupt flag is enabled 
-	if(TIM2->SR & TIM_SR_UIF){
+#include "macros.h"
+#include "stm32l4xx.h"
+
+void TIM2_IRQHandler(void) {
+	// Check if The update interrupt flag is enabled
+	if (TIM2->SR & TIM_SR_UIF) {
 		// Clear the interrupt
 		TIM2->SR &= ~TIM_SR_UIF;
 
@@ -18,8 +19,7 @@ void TIM2_IRQHandler(void){
 	}
 }
 
-int main(void)
-{
+int main(void) {
 	// Enable GPIO clock
 	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;
 
@@ -36,7 +36,7 @@ int main(void)
 	NVIC_EnableIRQ(TIM2_IRQn);
 
 	// Set Timer prescaler to the ms
-	TIM2->PSC= SystemCoreClock/1000;
+	TIM2->PSC = SystemCoreClock / 1000;
 	// Set the timer auto-reload register to 1 sec
 	TIM2->ARR = 1000;
 	// Re-init the counter and update the registers
@@ -48,9 +48,7 @@ int main(void)
 	// Enable the Timer
 	TIM2->CR1 |= TIM_CR1_CEN;
 
-
-	while (1)
-	{
+	while (1) {
 	}
 	return 0;
 }
