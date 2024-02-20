@@ -5,9 +5,9 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Debug 01-timer",
+			"name": "Debug 01-blink",
 			"cwd": "${workspaceRoot}",
-			"executable": "projects/02-timer/main.elf",
+			"executable": "projects/01-blink/main.elf",
 			"request": "launch",
 			"type": "cortex-debug",
 			"servertype": "openocd",
@@ -60,6 +60,19 @@
 			"name": "Debug 05-pwm-timer",
 			"cwd": "${workspaceRoot}",
 			"executable": "projects/05-pwm-timer/main.elf",
+			"request": "launch",
+			"type": "cortex-debug",
+			"servertype": "openocd",
+			"gdbPath": "${config:toolchain.bin}/${config:toolchain.targetarch}gdb",
+			"configFiles": [
+                "board/st_nucleo_l4.cfg"
+			],
+			"svdFile": "svd/STM32L4x2.svd",
+		},
+		{
+			"name": "Debug 06-lowpower",
+			"cwd": "${workspaceRoot}",
+			"executable": "projects/06-lowpower/main.elf",
 			"request": "launch",
 			"type": "cortex-debug",
 			"servertype": "openocd",

@@ -48,6 +48,10 @@ int main(void)
 	// Enable the Timer
 	TIM2->CR1 |= TIM_CR1_CEN;
 
+	RCC->CR |= RCC_CR_MSIRGSEL;
+	uint32_t cr = RCC->CR;
+	cr = (cr & ~RCC_CR_MSIRANGE_Msk) | RCC_CR_MSIRANGE_5;
+	RCC->CR = cr;
 
 	while (1)
 	{

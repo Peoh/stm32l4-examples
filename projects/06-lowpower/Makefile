@@ -8,7 +8,7 @@ LDFILE = ../../stm32l412kb.ld
 DEVICE = STM32L412xx
 
 ### Toolchain directory
-TOOLCHAIN_DIR = /opt/arm-none-eabi/11.2-2022.02/bin/
+TOOLCHAIN_DIR = /opt/arm-none-eabi/10-2020-q4/bin/
 
 CC = ${TOOLCHAIN_DIR}arm-none-eabi-gcc
 LD = ${TOOLCHAIN_DIR}arm-none-eabi-gcc
